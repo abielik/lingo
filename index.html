@@ -15,11 +15,11 @@
         <section class="main">
             
             <div class="guess-input-and-remaining">
-                <div>
-                    <label for="guess-input" id="guess-input">Enter Guess:</label>
-                    <input type="text" name="guess-input">
+                <form id='guess-input-form' method="POST">
+                    <label for="guess-input">Enter Guess:</label>
+                    <input type="text"  id="guess-input" name="guess-input">
                     <button type="submit">GO!</button>
-                </div>
+                </form>
                
                 <div class="guesses-remaining">Guesses Remaing: 5</div>
             </div>
