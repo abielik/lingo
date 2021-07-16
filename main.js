@@ -4,6 +4,11 @@ console.log(secretWord);
 
 const guessInputForm = document.querySelector("#guess-input-form");
 const guessInput = document.querySelector("#guess-input");
+const firstLetterBoxes = document.querySelectorAll(".letter-1");
+
+firstLetterBoxes.forEach((box) => {
+  box.innerText = secretWord[0];
+});
 
 guessInputForm.addEventListener("submit", handleGuessSubmit);
 
