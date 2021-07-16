@@ -1,11 +1,13 @@
 const secretWord = "HELLO".split("");
-
 console.log(secretWord);
 
 const guessInputForm = document.querySelector("#guess-input-form");
 const guessInput = document.querySelector("#guess-input");
 const firstLetterBoxes = document.querySelectorAll(".letter-1");
+const firstGuess = document.querySelectorAll("#guess-1 .letter");
+console.log("firstGuess:", firstGuess);
 
+// takes the first letter of the secret word and puts it in the first box
 firstLetterBoxes.forEach((box) => {
   box.innerText = secretWord[0];
 });
@@ -15,6 +17,7 @@ guessInputForm.addEventListener("submit", handleGuessSubmit);
 function handleGuessSubmit(event) {
   event.preventDefault();
   console.log(guessInput.value);
+  setLetters(guessInput.value.toUpperCase(), firstGuess);
   compareGuessToSecretWord(
     guessInput.value.toUpperCase().split(""),
     secretWord
@@ -40,5 +43,11 @@ function compareGuessToSecretWord(guessInput, secretWord) {
       // wrong letter
       console.log("wrong letter");
     }
+  });
+}
+
+function setLetters(guessInput, row) {
+  row.forEach((box, index) => {
+    box.innerText = guessInput[index];
   });
 }
