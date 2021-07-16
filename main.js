@@ -36,15 +36,19 @@ function handleGuessSubmit(event) {
 
 function setLetters(guessInput, row) {
   row.forEach((box, index) => {
-    box.innerText = guessInput[index];
+    setInterval(() => {
+      box.innerText = guessInput[index];
+    }, index * 350);
 
-    if (box.innerText === secretWord[index]) {
-      // correct letter correct spot
-      box.style.backgroundColor = "red";
-    } else if (secretWord.includes(box.innerText)) {
-      // correct letter wrong spot
-      box.style.backgroundColor = "yellow";
-      box.style.borderRadius = "50%";
-    }
+    setInterval(() => {
+      if (box.innerText === secretWord[index]) {
+        // correct letter correct spot
+        box.style.backgroundColor = "red";
+      } else if (secretWord.includes(box.innerText)) {
+        // correct letter wrong spot
+        box.style.backgroundColor = "yellow";
+        box.style.borderRadius = "50%";
+      }
+    }, index * 350);
   });
 }
