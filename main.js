@@ -1,15 +1,20 @@
 const secretWord = "HELLO".split("");
-const guess = "HELLO".split("");
-console.log(guess);
+
 console.log(secretWord);
 
 const guessInputForm = document.querySelector("#guess-input-form");
+const guessInput = document.querySelector("#guess-input");
 
 guessInputForm.addEventListener("submit", handleGuessSubmit);
 
 function handleGuessSubmit(event) {
   event.preventDefault();
-  console.log("submitted");
+  console.log(guessInput.value);
+  compareGuessToSecretWord(
+    guessInput.value.toUpperCase().split(""),
+    secretWord
+  );
+  guessInput.value = "";
 }
 
 function compareGuessToSecretWord(guessInput, secretWord) {
@@ -32,4 +37,3 @@ function compareGuessToSecretWord(guessInput, secretWord) {
     }
   });
 }
-compareGuessToSecretWord(guess, secretWord);
