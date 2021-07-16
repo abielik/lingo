@@ -21,7 +21,7 @@ function handleGuessSubmit(event) {
   const row = document.querySelectorAll(`#guess-${totalGuesses + 1} .letter`);
   setLetters(guessInput.value.toUpperCase(), row);
   if (guessInput.value.toUpperCase() === secretWord.join("")) {
-    window.alert("You Win!");
+    return window.alert("You Win!");
   }
 
   // reset input box to empty string
