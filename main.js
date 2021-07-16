@@ -1,11 +1,11 @@
 const secretWord = "HELLO".split("");
-console.log(secretWord);
+console.log("secret word is: ", secretWord);
 
+let totalGuesses = 0;
 const guessInputForm = document.querySelector("#guess-input-form");
 const guessInput = document.querySelector("#guess-input");
 const firstLetterBoxes = document.querySelectorAll(".letter-1");
-const firstGuess = document.querySelectorAll("#guess-1 .letter");
-console.log("firstGuess:", firstGuess);
+const guessesRemaining = document.querySelector(".guesses-remaining span");
 
 // takes the first letter of the secret word and puts it in the first box
 firstLetterBoxes.forEach((box) => {
@@ -16,13 +16,20 @@ guessInputForm.addEventListener("submit", handleGuessSubmit);
 
 function handleGuessSubmit(event) {
   event.preventDefault();
-  console.log(guessInput.value);
-  setLetters(guessInput.value.toUpperCase(), firstGuess);
+
+  // had CONST ROW in the global scope but would always use the first row. Works properly in this scope
+  const row = document.querySelectorAll(`#guess-${totalGuesses + 1} .letter`);
+  setLetters(guessInput.value.toUpperCase(), row);
+
   compareGuessToSecretWord(
     guessInput.value.toUpperCase().split(""),
     secretWord
   );
+
+  // reset input box to empty string
   guessInput.value = "";
+  totalGuesses++;
+  guessesRemaining.innerText = parseInt(guessesRemaining.innerText) - 1;
 }
 
 function compareGuessToSecretWord(guessInput, secretWord) {
@@ -47,6 +54,7 @@ function compareGuessToSecretWord(guessInput, secretWord) {
 }
 
 function setLetters(guessInput, row) {
+  console.log("what is row: ", row);
   row.forEach((box, index) => {
     box.innerText = guessInput[index];
   });
