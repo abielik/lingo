@@ -16,19 +16,22 @@ guessInputForm.addEventListener("submit", handleGuessSubmit);
 
 function handleGuessSubmit(event) {
   event.preventDefault();
-
   // had CONST ROW in the global scope but would always use the first row. Works properly in this scope
   const row = document.querySelectorAll(`#guess-${totalGuesses + 1} .letter`);
+
   setLetters(guessInput.value.toUpperCase(), row);
   if (guessInput.value.toUpperCase() === secretWord.join("")) {
-    return window.alert("You Win!");
+    setTimeout(function () {
+      return window.alert("You Win!");
+    }, 2000);
   }
-
   // reset input box to empty string
   guessInput.value = "";
   totalGuesses++;
   if (totalGuesses === 5) {
-    window.alert("Sorry, you ran out of guesses");
+    setTimeout(function () {
+      window.alert("Sorry, you ran out of guesses");
+    }, 2000);
   }
   // decrement remaining guesses
   guessesRemaining.innerText = parseInt(guessesRemaining.innerText) - 1;
