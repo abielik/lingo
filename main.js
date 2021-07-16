@@ -23,7 +23,7 @@ function handleGuessSubmit(event) {
   if (guessInput.value.toUpperCase() === secretWord.join("")) {
     setTimeout(function () {
       return window.alert("You Win!");
-    }, 2000);
+    }, 1500);
   }
   // reset input box to empty string
   guessInput.value = "";
