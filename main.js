@@ -1,5 +1,5 @@
 const secretWord = "HELLO".split("");
-console.log("secret word is: ", secretWord);
+//console.log("secret word is: ", secretWord);
 
 let totalGuesses = 0;
 const guessInputForm = document.querySelector("#guess-input-form");
@@ -20,42 +20,31 @@ function handleGuessSubmit(event) {
   // had CONST ROW in the global scope but would always use the first row. Works properly in this scope
   const row = document.querySelectorAll(`#guess-${totalGuesses + 1} .letter`);
   setLetters(guessInput.value.toUpperCase(), row);
-
-  compareGuessToSecretWord(
-    guessInput.value.toUpperCase().split(""),
-    secretWord
-  );
+  if (guessInput.value.toUpperCase() === secretWord.join("")) {
+    window.alert("You Win!");
+  }
 
   // reset input box to empty string
   guessInput.value = "";
   totalGuesses++;
+  if (totalGuesses === 5) {
+    window.alert("Sorry, you ran out of guesses");
+  }
+  // decrement remaining guesses
   guessesRemaining.innerText = parseInt(guessesRemaining.innerText) - 1;
 }
 
-function compareGuessToSecretWord(guessInput, secretWord) {
-  // if correct guess
-  if (guessInput.join() === secretWord.join()) {
-    console.log("CORRECT GUESS!");
-    return;
-  }
-
-  guessInput.forEach((letter, index) => {
-    // if letter is correct and in correct position
-    if (secretWord[index] === letter) {
-      console.log("right letter right spot");
-    } else if (secretWord.includes(letter)) {
-      // else if letter is correct but in wrong position
-      console.log("right letter WRONG spot");
-    } else {
-      // wrong letter
-      console.log("wrong letter");
-    }
-  });
-}
-
 function setLetters(guessInput, row) {
-  console.log("what is row: ", row);
   row.forEach((box, index) => {
     box.innerText = guessInput[index];
+
+    if (box.innerText === secretWord[index]) {
+      // correct letter correct spot
+      box.style.backgroundColor = "red";
+    } else if (secretWord.includes(box.innerText)) {
+      // correct letter wrong spot
+      box.style.backgroundColor = "yellow";
+      box.style.borderRadius = "50%";
+    }
   });
 }
