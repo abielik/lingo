@@ -39,9 +39,7 @@ function handleGuessSubmit(event) {
   guessInput.value = "";
   totalGuesses++;
   if (totalGuesses === 5) {
-    setTimeout(function () {
-      window.alert("Sorry, you ran out of guesses");
-    }, 2000);
+    showLosingMessage("Sorry, you ran out of guesses!");
   }
   // decrement remaining guesses
   guessesRemaining.innerText = parseInt(guessesRemaining.innerText) - 1;
@@ -81,6 +79,13 @@ function countdown() {
     clock.innerText = timeRemaining;
     if (timeRemaining <= 0) {
       clearInterval(timer);
+      showLosingMessage("Sorry, you ran out of time!");
     }
   }, 1000);
+}
+
+function showLosingMessage(message) {
+  setTimeout(function () {
+    window.alert(message);
+  }, 2000);
 }
