@@ -1,11 +1,13 @@
 showSecretWordForm();
 let totalGuesses = 0;
+
 const guessInputForm = document.querySelector("#guess-input-form");
 const guessInput = document.querySelector("#guess-input");
 const firstLetterBoxes = document.querySelectorAll(".letter-1");
 const guessesRemaining = document.querySelector(".guesses-remaining span");
 const secretWordForm = document.querySelector("#secret-word-form");
 const secretWord = document.querySelector("#secret-word-input");
+const clock = document.querySelector("#clock");
 
 guessInputForm.addEventListener("submit", handleGuessSubmit);
 secretWordForm.addEventListener("submit", handleSecretWordSubmit);
@@ -17,6 +19,8 @@ function handleSecretWordSubmit(event) {
   firstLetterBoxes.forEach((box) => {
     box.innerText = secretWord.value[0].toUpperCase();
   });
+  // begin clock countdown
+  countdown();
 }
 
 function handleGuessSubmit(event) {
@@ -25,6 +29,7 @@ function handleGuessSubmit(event) {
   const row = document.querySelectorAll(`#guess-${totalGuesses + 1} .letter`);
 
   setLetters(guessInput.value.toUpperCase(), row);
+  // if user inputs winning guess
   if (guessInput.value.toUpperCase() === secretWord.value.toUpperCase()) {
     setTimeout(function () {
       return window.alert("You Win!");
@@ -67,4 +72,15 @@ function showSecretWordForm() {
 
 function hideSecretWordForm() {
   document.body.classList.remove("show-secret-word-form");
+}
+
+function countdown() {
+  let timeRemaining = 60;
+  let timer = setInterval(function () {
+    timeRemaining--;
+    clock.innerText = timeRemaining;
+    if (timeRemaining <= 0) {
+      clearInterval(timer);
+    }
+  }, 1000);
 }
