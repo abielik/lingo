@@ -1,24 +1,25 @@
-const secretWord = "HELLO".split("");
+//const secretWord = "HELLO".split("");
 //console.log("secret word is: ", secretWord);
-
+showSecretWordForm();
 let totalGuesses = 0;
 const guessInputForm = document.querySelector("#guess-input-form");
 const guessInput = document.querySelector("#guess-input");
 const firstLetterBoxes = document.querySelectorAll(".letter-1");
 const guessesRemaining = document.querySelector(".guesses-remaining span");
 const secretWordForm = document.querySelector("#secret-word-form");
+const secretWord = document.querySelector("#secret-word-input");
 
-// takes the first letter of the secret word and puts it in the first box
-firstLetterBoxes.forEach((box) => {
-  box.innerText = secretWord[0];
-});
-showSecretWordForm();
 guessInputForm.addEventListener("submit", handleGuessSubmit);
 secretWordForm.addEventListener("submit", handleSecretWordSubmit);
 
 function handleSecretWordSubmit(event) {
   event.preventDefault();
   hideSecretWordForm();
+  // takes the first letter of the secret word and puts it in the first box
+  firstLetterBoxes.forEach((box) => {
+    console.log(secretWord.value);
+    box.innerText = secretWord.value[0].toUpperCase();
+  });
 }
 
 function handleGuessSubmit(event) {
@@ -27,7 +28,7 @@ function handleGuessSubmit(event) {
   const row = document.querySelectorAll(`#guess-${totalGuesses + 1} .letter`);
 
   setLetters(guessInput.value.toUpperCase(), row);
-  if (guessInput.value.toUpperCase() === secretWord.join("")) {
+  if (guessInput.value.toUpperCase() === secretWord.value.toUpperCase()) {
     setTimeout(function () {
       return window.alert("You Win!");
     }, 1500);
@@ -51,10 +52,11 @@ function setLetters(guessInput, row) {
     }, index * 350);
 
     setTimeout(function () {
-      if (box.innerText === secretWord[index]) {
+      console.log("what is secretword.value: ", secretWord.value);
+      if (box.innerText === secretWord.value[index].toUpperCase()) {
         // correct letter correct spot
         box.style.backgroundColor = "red";
-      } else if (secretWord.includes(box.innerText)) {
+      } else if (secretWord.value.toUpperCase().includes(box.innerText)) {
         // correct letter wrong spot
         box.style.backgroundColor = "yellow";
         box.style.borderRadius = "50%";
