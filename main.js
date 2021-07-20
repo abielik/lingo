@@ -39,11 +39,11 @@ function handleGuessSubmit(event) {
 
 function setLetters(guessInput, row) {
   row.forEach((box, index) => {
-    setInterval(() => {
+    setTimeout(function () {
       box.innerText = guessInput[index];
     }, index * 350);
 
-    setInterval(() => {
+    setTimeout(function () {
       if (box.innerText === secretWord[index]) {
         // correct letter correct spot
         box.style.backgroundColor = "red";
