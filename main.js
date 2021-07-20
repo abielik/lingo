@@ -15,7 +15,6 @@ function handleSecretWordSubmit(event) {
   hideSecretWordForm();
   // takes the first letter of the secret word and puts it in the first box
   firstLetterBoxes.forEach((box) => {
-    console.log(secretWord.value);
     box.innerText = secretWord.value[0].toUpperCase();
   });
 }
