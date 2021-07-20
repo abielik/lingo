@@ -6,13 +6,20 @@ const guessInputForm = document.querySelector("#guess-input-form");
 const guessInput = document.querySelector("#guess-input");
 const firstLetterBoxes = document.querySelectorAll(".letter-1");
 const guessesRemaining = document.querySelector(".guesses-remaining span");
+const secretWordForm = document.querySelector("#secret-word-form");
 
 // takes the first letter of the secret word and puts it in the first box
 firstLetterBoxes.forEach((box) => {
   box.innerText = secretWord[0];
 });
-
+showSecretWordForm();
 guessInputForm.addEventListener("submit", handleGuessSubmit);
+secretWordForm.addEventListener("submit", handleSecretWordSubmit);
+
+function handleSecretWordSubmit(event) {
+  event.preventDefault();
+  hideSecretWordForm();
+}
 
 function handleGuessSubmit(event) {
   event.preventDefault();
@@ -54,4 +61,12 @@ function setLetters(guessInput, row) {
       }
     }, index * 350);
   });
+}
+
+function showSecretWordForm() {
+  document.body.classList.add("show-secret-word-form");
+}
+
+function hideSecretWordForm() {
+  document.body.classList.remove("show-secret-word-form");
 }

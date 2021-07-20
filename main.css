@@ -32,7 +32,7 @@ header {
 }
 
 .secret-word-container {
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   position: fixed;
@@ -41,6 +41,10 @@ header {
   width: 100vw;
   height: 100vh;
   background-color: rgb(226, 228, 228, 0.7);
+}
+
+body.show-secret-word-form .secret-word-container {
+  display: flex;
 }
 
 .secret-word-inner-container {
@@ -79,7 +83,7 @@ li .incorrect-color {
   margin-left: 5px;
 }
 
-.secret-word-form {
+#secret-word-form {
   flex: 1;
 }
 
