@@ -9,8 +9,30 @@
     <title>Lingo!</title>
 </head>
 <body>
+    
     <div class="page-container">
         <header>LINGO</header>
+
+        <div class="secret-word-container">
+            <div class="secret-word-inner-container">
+                <div class="rules">
+                    <h2>Rules:</h2>
+                    <ol>
+                        <li>Player has 5 chances to correctly guess the secret word before the timer runs out</li>
+                        <li>No names or proper nouns</li>
+                        <li>Correct letters in the CORRECT place will appear in <span class="correct-color"></span></li>
+                        <li>Correct letters in the INCORRECT place will appear in <span class="incorrect-color"></span></li>
+                    </ol>
+                </div>
+                <form class="secret-word-form">
+                    <h3>To Get Started, Please Enter in Your Secret 5 Letter Word</h3>
+                    <label for="secret-word-input">Enter Secret Word:</label>
+                    <input type="text" id="secret-word-input" name="secret-word-input">
+                    <button type="submit">Start Game</button>
+                </form>
+               
+            </div>
+        </div>
 
         <section class="main">
             
