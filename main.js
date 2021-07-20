@@ -1,5 +1,7 @@
 showSecretWordForm();
 let totalGuesses = 0;
+let timeRemaining = 7;
+let isGameWon = false; // used to stop the timer from counting down when the game is won
 
 const guessInputForm = document.querySelector("#guess-input-form");
 const guessInput = document.querySelector("#guess-input");
@@ -31,6 +33,7 @@ function handleGuessSubmit(event) {
   setLetters(guessInput.value.toUpperCase(), row);
   // if user inputs winning guess
   if (guessInput.value.toUpperCase() === secretWord.value.toUpperCase()) {
+    isGameWon = true;
     setTimeout(function () {
       return window.alert("You Win!");
     }, 1500);
@@ -73,8 +76,10 @@ function hideSecretWordForm() {
 }
 
 function countdown() {
-  let timeRemaining = 60;
-  let timer = setInterval(function () {
+  const timer = setInterval(function () {
+    if (isGameWon) {
+      return clearInterval(timer);
+    }
     timeRemaining--;
     clock.innerText = timeRemaining;
     if (timeRemaining <= 0) {
