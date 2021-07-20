@@ -54,11 +54,7 @@ body.show-secret-word-form .secret-word-container {
   border-radius: 10px;
   box-shadow: 0 15px 15px rgb(0 0 0 / 20%);
   padding: 15px;
-  /* padding: 300px 30px; */
-  /* width: 750px; */
-  /* max-width: 90%; */
   text-align: center;
-  height: 400px;
   color: white;
   background-color: black;
 }

@@ -1,5 +1,3 @@
-//const secretWord = "HELLO".split("");
-//console.log("secret word is: ", secretWord);
 showSecretWordForm();
 let totalGuesses = 0;
 const guessInputForm = document.querySelector("#guess-input-form");
@@ -52,7 +50,6 @@ function setLetters(guessInput, row) {
     }, index * 350);
 
     setTimeout(function () {
-      console.log("what is secretword.value: ", secretWord.value);
       if (box.innerText === secretWord.value[index].toUpperCase()) {
         // correct letter correct spot
         box.style.backgroundColor = "red";
