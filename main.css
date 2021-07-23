@@ -118,3 +118,44 @@ li .incorrect-color {
   margin: auto;
   text-align: center;
 }
+
+.end-game-message-container {
+  /* display: none; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  /* top: 0; */
+  /* left: 0; */
+  width: 100vw;
+  height: 70vh;
+  background-color: rgb(1 35 35 / 31%);
+}
+
+.end-game-message-inner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid red;
+  border-radius: 10px;
+  box-shadow: 0 15px 15px rgb(0 0 0 / 20%);
+  padding: 145px;
+  text-align: center;
+  color: white;
+  background-color: black;
+}
+
+.end-game-message {
+  color: white;
+  position: relative;
+  bottom: 50px;
+  margin: 10px;
+  font-size: 40px;
+  flex: 3;
+}
+
+#new-game-button {
+  background-color: cornflowerblue;
+  height: 75px;
+  width: 160px;
+}

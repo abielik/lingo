@@ -1,6 +1,6 @@
 showSecretWordForm();
 let totalGuesses = 0;
-let timeRemaining = 7;
+let timeRemaining = 60;
 let isGameWon = false; // used to stop the timer from counting down when the game is won
 
 const guessInputForm = document.querySelector("#guess-input-form");
