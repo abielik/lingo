@@ -1,6 +1,6 @@
 showSecretWordForm();
 let totalGuesses = 0;
-let timeRemaining = 60;
+let timeRemaining = 3;
 let isGameWon = false; // used to stop the timer from counting down when the game is won
 
 const guessInputForm = document.querySelector("#guess-input-form");
@@ -10,6 +10,7 @@ const guessesRemaining = document.querySelector(".guesses-remaining span");
 const secretWordForm = document.querySelector("#secret-word-form");
 const secretWord = document.querySelector("#secret-word-input");
 const clock = document.querySelector("#clock");
+const endGameMessage = document.querySelector(".end-game-message");
 
 guessInputForm.addEventListener("submit", handleGuessSubmit);
 secretWordForm.addEventListener("submit", handleSecretWordSubmit);
@@ -35,14 +36,14 @@ function handleGuessSubmit(event) {
   if (guessInput.value.toUpperCase() === secretWord.value.toUpperCase()) {
     isGameWon = true;
     setTimeout(function () {
-      return window.alert("You Win!");
-    }, 1500);
+      return showEndGameMessage("Congrats, you guessed the secret word!");
+    }, 2000);
   }
   // reset input box to empty string
   guessInput.value = "";
   totalGuesses++;
   if (totalGuesses === 5) {
-    showLosingMessage("Sorry, you ran out of guesses!");
+    showEndGameMessage("Sorry, you ran out of guesses!");
   }
   // decrement remaining guesses
   guessesRemaining.innerText = parseInt(guessesRemaining.innerText) - 1;
@@ -75,6 +76,11 @@ function hideSecretWordForm() {
   document.body.classList.remove("show-secret-word-form");
 }
 
+function showEndGameMessage(message) {
+  endGameMessage.innerText = message;
+  document.body.classList.add("show-end-game-message");
+}
+
 function countdown() {
   const timer = setInterval(function () {
     if (isGameWon) {
@@ -84,13 +90,7 @@ function countdown() {
     clock.innerText = timeRemaining;
     if (timeRemaining <= 0) {
       clearInterval(timer);
-      showLosingMessage("Sorry, you ran out of time!");
+      showEndGameMessage("Sorry, you ran out of time!");
     }
   }, 1000);
-}
-
-function showLosingMessage(message) {
-  setTimeout(function () {
-    window.alert(message);
-  }, 2000);
 }

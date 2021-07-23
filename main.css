@@ -120,8 +120,8 @@ li .incorrect-color {
 }
 
 .end-game-message-container {
-  /* display: none; */
-  display: flex;
+  display: none;
+  /* display: flex; */
   align-items: center;
   justify-content: center;
   position: fixed;
@@ -158,4 +158,8 @@ li .incorrect-color {
   background-color: cornflowerblue;
   height: 75px;
   width: 160px;
+}
+
+body.show-end-game-message .end-game-message-container {
+  display: flex;
 }
