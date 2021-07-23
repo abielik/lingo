@@ -1,7 +1,9 @@
 showSecretWordForm();
-let totalGuesses = 0;
-let timeRemaining = 60;
-let isGameWon = false; // used to stop the timer from counting down when the game is won
+const defaultGameValues = {
+  totalGuesses: 0,
+  timeRemaining: 60,
+  isGameWon: false, // used to stop the timer from counting down when the game is won
+};
 
 const guessInputForm = document.querySelector("#guess-input-form");
 const guessInput = document.querySelector("#guess-input");
@@ -12,6 +14,7 @@ const secretWord = document.querySelector("#secret-word-input");
 const clock = document.querySelector("#clock");
 const endGameMessage = document.querySelector(".end-game-message");
 const newGameButton = document.querySelector("#new-game-button");
+const allBoxes = document.querySelectorAll(".letter");
 
 guessInputForm.addEventListener("submit", handleGuessSubmit);
 secretWordForm.addEventListener("submit", handleSecretWordSubmit);
@@ -31,12 +34,14 @@ function handleSecretWordSubmit(event) {
 function handleGuessSubmit(event) {
   event.preventDefault();
   // had CONST ROW in the global scope but would always use the first row. Works properly in this scope
-  const row = document.querySelectorAll(`#guess-${totalGuesses + 1} .letter`);
+  const row = document.querySelectorAll(
+    `#guess-${defaultGameValues.totalGuesses + 1} .letter`
+  );
 
   setLetters(guessInput.value.toUpperCase(), row);
   // if user inputs winning guess
   if (guessInput.value.toUpperCase() === secretWord.value.toUpperCase()) {
-    isGameWon = true;
+    defaultGameValues.isGameWon = true;
     setTimeout(function () {
       return showEndGameMessage(
         `Congrats, you guessed the secret word, ${secretWord.value.toUpperCase()}!`
@@ -45,8 +50,8 @@ function handleGuessSubmit(event) {
   }
   // reset input box to empty string
   guessInput.value = "";
-  totalGuesses++;
-  if (totalGuesses === 5) {
+  defaultGameValues.totalGuesses++;
+  if (defaultGameValues.totalGuesses === 5) {
     showEndGameMessage(
       "Sorry, you ran out of guesses! The secret word was " +
         secretWord.value.toUpperCase()
@@ -95,19 +100,17 @@ function hideEndGameMessage() {
 function handleNewGame() {
   document.body.classList.remove("show-end-game-message");
   guessesRemaining.innerText = 5;
-  guesses = 0;
-  timeRemaining = 60;
-  isGameWon = false;
+  resetDefaultValues();
 }
 
 function countdown() {
   const timer = setInterval(function () {
-    if (isGameWon) {
+    if (defaultGameValues.isGameWon) {
       return clearInterval(timer);
     }
-    timeRemaining--;
-    clock.innerText = timeRemaining;
-    if (timeRemaining <= 0) {
+    defaultGameValues.timeRemaining--;
+    clock.innerText = defaultGameValues.timeRemaining;
+    if (defaultGameValues.timeRemaining <= 0) {
       clearInterval(timer);
       showEndGameMessage(
         "Sorry, you ran out of time! The secret word was " +
@@ -115,4 +118,17 @@ function countdown() {
       );
     }
   }, 1000);
+}
+
+function resetDefaultValues() {
+  defaultGameValues.totalGuessesuesses = 0;
+  defaultGameValues.timeRemaining = 60;
+  defaultGameValues.isGameWon = false;
+  resetAllBoxes();
+}
+
+function resetAllBoxes() {
+  allBoxes.forEach((box) => {
+    box.innerText = "";
+  });
 }
