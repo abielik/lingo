@@ -130,5 +130,6 @@ function resetDefaultValues() {
 function resetAllBoxes() {
   allBoxes.forEach((box) => {
     box.innerText = "";
+    box.style.backgroundColor = "transparent";
   });
 }
