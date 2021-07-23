@@ -11,9 +11,11 @@ const secretWordForm = document.querySelector("#secret-word-form");
 const secretWord = document.querySelector("#secret-word-input");
 const clock = document.querySelector("#clock");
 const endGameMessage = document.querySelector(".end-game-message");
+const newGameButton = document.querySelector("#new-game-button");
 
 guessInputForm.addEventListener("submit", handleGuessSubmit);
 secretWordForm.addEventListener("submit", handleSecretWordSubmit);
+newGameButton.addEventListener("click", hideEndGameMessage);
 
 function handleSecretWordSubmit(event) {
   event.preventDefault();
@@ -79,6 +81,10 @@ function hideSecretWordForm() {
 function showEndGameMessage(message) {
   endGameMessage.innerText = message;
   document.body.classList.add("show-end-game-message");
+}
+
+function hideEndGameMessage() {
+  document.body.classList.remove("show-end-game-message");
 }
 
 function countdown() {
