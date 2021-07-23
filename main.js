@@ -1,6 +1,6 @@
 showSecretWordForm();
 let totalGuesses = 0;
-let timeRemaining = 3;
+let timeRemaining = 60;
 let isGameWon = false; // used to stop the timer from counting down when the game is won
 
 const guessInputForm = document.querySelector("#guess-input-form");
@@ -15,7 +15,7 @@ const newGameButton = document.querySelector("#new-game-button");
 
 guessInputForm.addEventListener("submit", handleGuessSubmit);
 secretWordForm.addEventListener("submit", handleSecretWordSubmit);
-newGameButton.addEventListener("click", hideEndGameMessage);
+newGameButton.addEventListener("click", handleNewGame);
 
 function handleSecretWordSubmit(event) {
   event.preventDefault();
@@ -38,14 +38,19 @@ function handleGuessSubmit(event) {
   if (guessInput.value.toUpperCase() === secretWord.value.toUpperCase()) {
     isGameWon = true;
     setTimeout(function () {
-      return showEndGameMessage("Congrats, you guessed the secret word!");
+      return showEndGameMessage(
+        `Congrats, you guessed the secret word, ${secretWord.value.toUpperCase()}!`
+      );
     }, 2000);
   }
   // reset input box to empty string
   guessInput.value = "";
   totalGuesses++;
   if (totalGuesses === 5) {
-    showEndGameMessage("Sorry, you ran out of guesses!");
+    showEndGameMessage(
+      "Sorry, you ran out of guesses! The secret word was " +
+        secretWord.value.toUpperCase()
+    );
   }
   // decrement remaining guesses
   guessesRemaining.innerText = parseInt(guessesRemaining.innerText) - 1;
@@ -79,12 +84,20 @@ function hideSecretWordForm() {
 }
 
 function showEndGameMessage(message) {
-  endGameMessage.innerText = message;
+  endGameMessage.innerHTML = message;
   document.body.classList.add("show-end-game-message");
 }
 
 function hideEndGameMessage() {
   document.body.classList.remove("show-end-game-message");
+}
+
+function handleNewGame() {
+  document.body.classList.remove("show-end-game-message");
+  guessesRemaining.innerText = 5;
+  guesses = 0;
+  timeRemaining = 60;
+  isGameWon = false;
 }
 
 function countdown() {
@@ -96,7 +109,10 @@ function countdown() {
     clock.innerText = timeRemaining;
     if (timeRemaining <= 0) {
       clearInterval(timer);
-      showEndGameMessage("Sorry, you ran out of time!");
+      showEndGameMessage(
+        "Sorry, you ran out of time! The secret word was " +
+          secretWord.value.toUpperCase()
+      );
     }
   }, 1000);
 }
