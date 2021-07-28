@@ -98,9 +98,10 @@ function hideEndGameMessage() {
 }
 
 function handleNewGame() {
-  document.body.classList.remove("show-end-game-message");
+  hideEndGameMessage();
   guessesRemaining.innerText = 5;
   resetDefaultValues();
+  showSecretWordForm();
 }
 
 function countdown() {
@@ -121,7 +122,7 @@ function countdown() {
 }
 
 function resetDefaultValues() {
-  defaultGameValues.totalGuessesuesses = 0;
+  defaultGameValues.totalGuesses = 0;
   defaultGameValues.timeRemaining = 60;
   defaultGameValues.isGameWon = false;
   resetAllBoxes();
