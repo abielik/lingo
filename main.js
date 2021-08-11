@@ -47,6 +47,7 @@ function handleGuessSubmit(event) {
         `Congrats, you guessed the secret word, ${secretWord.value.toUpperCase()}!`
       );
     }, 2000);
+    return;
   }
   // reset input box to empty string
   guessInput.value = "";
@@ -134,3 +135,5 @@ function resetAllBoxes() {
     box.style.backgroundColor = "transparent";
   });
 }
+
+function checkGuess(guess) {}
